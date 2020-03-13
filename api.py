@@ -19,3 +19,29 @@ def lister_parties(idul):
         print("Le GET sur '{}' a produit le code d'erreur {}".format(
             url_lister, reponse.status_code)
         )
+
+def initialiser_partie(idul):
+    """
+    Qu'est-ce que fait ma fonction? La fonction permet de lister les parties d'un joueur
+    Quels sont les paramètres en entré de ma fonction? idul
+    Quelle est la sortie et/ou le retour de ma fonction? 
+    """
+    url_initial = "https://python.gel.ulaval.ca/quoridor/api/initialiser/"
+    try:
+        reponse = requests.post(url_initial, data={"idul": idul})
+        if reponse.status_code == 200:
+            json_rep = reponse.json()
+            return json_rep["id"], json_rep["état"]
+        else:
+            print("Le POST sur '{}' a produit le code d'erreur {}".format(
+                url_initial, reponse.status_code)
+            )
+    except RuntimeError as error:
+        print(error)
+
+
+
+    
+
+
+print(initialiser_partie("alvoi4"))
