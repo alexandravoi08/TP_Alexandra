@@ -1,5 +1,5 @@
 import argparse
-
+import api
 
 jeu_prof = {
     "joueurs": [
@@ -106,10 +106,12 @@ def afficher_damier_ascii(etat_de_jeu):
     sortie += "  | 1   2   3   4   5   6   7   8   9\n"
     print(sortie)      
 
-def main():
-    afficher_damier_ascii(jeu_prof)
-
-
+#Test de mes fonctions (tentative de jeu):
 if __name__ == "__main__":
-    main()
+    #init = api.initialiser_partie('alvoi4')
+    #print(init)
+    partie = "18137b41-c68d-4606-99c4-4c71a81bfce8"
+    coup = api.jouer_coup('4592dc16-dc4c-4c32-bfea-acb903a23450', "D", (5,3))
+    afficher_damier_ascii(coup["état"])
+    print(coup)
 
