@@ -1,7 +1,7 @@
 import requests
 import json
 
-
+#3e fonction
 def lister_parties(idul):
     """
     Qu'est-ce que fait ma fonction? La fonction permet de lister les parties d'un joueur
@@ -19,7 +19,7 @@ def lister_parties(idul):
         print("Le GET sur '{}' a produit le code d'erreur {}".format(
             url_lister, reponse.status_code)
         )
-
+#4e fonction
 def initialiser_partie(idul):
     """
     Qu'est-ce que fait ma fonction? La fonction permet de lister les parties d'un joueur
@@ -28,24 +28,24 @@ def initialiser_partie(idul):
     """
     url_initial = "https://python.gel.ulaval.ca/quoridor/api/initialiser/"
     try:
-        reponse = requests.post(url_initial, data={"idul": idul})
+        reponse = requests.post(url_initial, data={'idul': idul})
         if reponse.status_code == 200:
             json_rep = reponse.json()
-            return json_rep["id"], json_rep["état"]
+            return json_rep['id'], json_rep['état']
         else:
             print("Le POST sur '{}' a produit le code d'erreur {}".format(
                 url_initial, reponse.status_code)
             )
     except RuntimeError as error:
         print(error)
-
+#Dernière fonction (5e)
 def jouer_coup(id_partie, type_coup, position):
     url_coup = 'https://python.gel.ulaval.ca/quoridor/api/jouer/'
     try:
         reponse = requests.post(url_coup, data={'id': id_partie, 'type': type_coup, 'pos': position})
         if reponse.status_code == 200:
-            json_res = reponse.json()
-            if "gagnant" in json_res:
+            json_rep = reponse.json()
+            if "gagnant" in json_rep:
                 raise StopIteration(json_rep["gagnant"])
             else:
                 return json_rep
@@ -57,4 +57,3 @@ def jouer_coup(id_partie, type_coup, position):
         print(error)
 
 
-print(initialiser_partie("alvoi4"))

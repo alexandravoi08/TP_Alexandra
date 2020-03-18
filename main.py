@@ -1,6 +1,6 @@
 import argparse
 import api
-
+#Test pour voir si code fonctionne
 jeu_prof = {
     "joueurs": [
         {"nom": "idul", "murs": 7, "pos": [5, 5]}, 
@@ -11,6 +11,7 @@ jeu_prof = {
         "verticaux": [[6, 2], [4, 4], [2, 6], [7, 5], [7, 7]]
     }
 }
+#1e fonction
 def analyser_commande():
     parser = argparse.ArgumentParser(description="Jeu Quoridor - phase 1")
     parser.add_argument("IDUL", metavar="IDUL", 
@@ -19,7 +20,7 @@ def analyser_commande():
                        help="Lister les identifiants de vos 20 dernières parties,")
     return parser.parse_args()
 
-    
+    #Pour afficher la table du jeu, 2e fonction
 def afficher_damier_ascii(etat_de_jeu):
     """
     Fonction pour afficher à la console le damier complet actuel d'un état de jeu.
