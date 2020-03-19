@@ -9,16 +9,19 @@ def lister_parties(idul):
     Quelle est la sortie et/ou le retour de ma fonction? 
     """
     url_lister = "https://python.gel.ulaval.ca/quoridor/api/lister/"
-    reponse = requests.get(url_lister, params={"idul": idul})
-    if reponse.status_code == 200:
-        reponse = reponse.text
-        json_objet = json.loads(reponse)
-        json_format = json.dumps(json_objet, indent=4)
-        print(json_format)
-    else:
-        print("Le GET sur '{}' a produit le code d'erreur {}".format(
-            url_lister, reponse.status_code)
-        )
+    try:
+        reponse = requests.get(url_lister, params={"idul": idul})
+        if reponse.status_code == 200:
+            reponse = reponse.text
+            json_objet = json.loads(reponse)
+            json_format = json.dumps(json_objet, indent=4)
+            print(json_format)
+        else:
+            print("Le GET sur '{}' a produit le code d'erreur {}".format(
+                url_lister, reponse.status_code
+            ))
+    except RuntimeError as error:
+        print(error)
 #4e fonction
 def initialiser_partie(idul):
     """
@@ -47,6 +50,8 @@ def jouer_coup(id_partie, type_coup, position):
             json_rep = reponse.json()
             if "gagnant" in json_rep:
                 raise StopIteration(json_rep["gagnant"])
+            elif 'message' in json_rep:
+                print(json_rep['message'])
             else:
                 return json_rep
         else:
