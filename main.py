@@ -27,9 +27,9 @@ def afficher_damier_ascii(etat_de_jeu):
     :param etat_de_jeu: Un dictionnaire contenant tous les infos d'un état de jeu.
     :return: None
     """
-    # 
+    #
     damier, verti, horiz = [], [], []
-    # 
+    # Boucle 1e pour tableau
     for i in range(9):
         mat_damier, mat_verti, mat_horiz = [], [], []
         for j in range(9):
@@ -39,23 +39,23 @@ def afficher_damier_ascii(etat_de_jeu):
         damier.append(mat_damier)
         verti.append(mat_verti)
         horiz.append(mat_horiz)
-    # 
+    # Position
     posi_j_1 = etat_de_jeu['joueurs'][0]['pos']
     posi_j_2 = etat_de_jeu['joueurs'][1]['pos']
     damier[posi_j_1[1] - 1][posi_j_1[0] - 1] = '1'
     damier[posi_j_2[1] - 1][posi_j_2[0] - 1] = '2'
     damier.reverse()
-    # 
+    # 2e boucle
     for a, b in etat_de_jeu['murs']['horizontaux']:
         horiz[b - 1][a - 1] = '---'
     horiz.reverse()
-    # 
+    # 3e boucle
     for a, b in etat_de_jeu['murs']['verticaux']:
         verti[b - 1][a - 1] = '|'
     verti.reverse()
-    # 
+    
     sortie = "   -----------------------------------\n"
-    # 
+    # Sortie de tableau
     for i in range(9):
         # 
         if i == 8:
@@ -73,7 +73,7 @@ def afficher_damier_ascii(etat_de_jeu):
             )
             sortie = sortie[:-1]
             sortie += "|\n"
-        #
+        #Tableau encore
         else:
             sortie += "{} |".format(9 - i)
             sortie += "{}{} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}  ".format(
@@ -107,12 +107,13 @@ def afficher_damier_ascii(etat_de_jeu):
     sortie += "  | 1   2   3   4   5   6   7   8   9\n"
     print(sortie)      
 
-#Test de mes fonctions (tentative de jeu):
+#Test de mes fonctions (tentative de jeu), mettre en commentaire les 4 dernières lignes, faire rouler le code et prendre le code pour "partie"
+#Ensuite, mettre les 2 premières lignes en commentaire et faire rouler le code en commencant par les pions (5,2) et jouer.
 if __name__ == "__main__":
     #init = api.initialiser_partie('alvoi4')
     #print(init)
-    partie = "18137b41-c68d-4606-99c4-4c71a81bfce8"
-    coup = api.jouer_coup('4592dc16-dc4c-4c32-bfea-acb903a23450', "D", (5,3))
-    afficher_damier_ascii(coup["état"])
+    partie = "426b3356-bd69-4c5c-af2a-6f2b968d50aa"
+    coup = api.jouer_coup(partie, "D", (5,2))
+    afficher_damier_ascii(coup['état'])
     print(coup)
 
